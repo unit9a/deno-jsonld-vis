@@ -1,0 +1,6 @@
+[submodule "jsonld-vis"]
+	path = jsonld-vis
+	url = git@github.com:unit9a/jsonld-vis.git
+[submodule "original"]
+	path = original
+	url = git@github.com:science-periodicals/jsonld-vis.git
