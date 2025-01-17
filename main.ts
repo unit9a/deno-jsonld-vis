@@ -5,21 +5,8 @@ const staticPathPattern = new URLPattern({ pathname: "/static/*" });
 
 export default {
   fetch(req) {
-    const url = new URL(req.url);
-
-    if (url.pathname === "/") {
-      return new Response("Home page");
-    }
-
-    const userPageMatch = userPagePattern.exec(url);
-    if (userPageMatch) {
-      return new Response(userPageMatch.pathname.groups.id);
-    }
-
-    if (staticPathPattern.test(url)) {
-      return serveDir(req);
-    }
-
-    return new Response("Not found", { status: 404 });
+    return serveDir(req, {
+      fsRoot: "jsonld-vis/example"
+    });
   },
 } satisfies Deno.ServeDefaultExport;
