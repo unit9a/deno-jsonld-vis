@@ -46,23 +46,48 @@ NO js, semantic html annotation must be used
 
 - must include source pdf or image or binary
 - there must be a folder called LD
-  - can contain only json-LD files. possibly other rdf formats
-  - all json-ld should externally referenced in the html. Example:
+  - can contain only json-LD json files. possibly other rdf formats
+  - all json-ld should externally referenced in the html header. Example:
 ```
      <script src="ld/snippet.json" type="application/ld+json"></script>
 ```
 
-json ld editing spa web tool
- - the reference html doc is loaded in a iframe 
- -  the parent listens for changes in the reference html doc
- - on startup and after any detected file change: the html is parsed
-  - parent iterates over all jsonLD script tags to build json doc mapping a jsonLD file path+name to its contents. 
-- parent uses this json doc map  to build a FLAT knowledge graph of subsystems
-    - the file path becomes the jsonld snippet ID
-- parent can/Must? convert this to owl/rdf to enable querying?
-  - can json Path be used?
-  - !! is jsonLD can be converted to RDF then USE SPARQL.
+https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata
+https://html.spec.whatwg.org/multipage/microdata.html
+https://developer.mozilla.org/en-US/docs/Web/XPath/Introduction_to_using_XPath_in_JavaScript
 
+combining Json-LD and microdata
+- use microdata "itemType" properties to reference Json-LD property paths
+- xpath 3.1 should be used to query both Json and html/xml path querying but must be defined in JSON-LD object
+- values Must be extracted from the Html using xpath expression in the related/reference  json-ld object
+
+
+annotation editor web app:
+ - the reference htmlZ doc is loaded in a iframe (zipping & unzipping will ba added later)
+ - the parent listens for changes in the reference html doc files
+ - on startup and after any detected file is saved/change: the knowledge graph is updated
+
+process:
+1. vscode is use to edit html & json-LD with micro data item properties
+2. web app listens for file save events and updates knowledge graph via x-path 3.1
+3. updated knowledge graph is referenced from the Wot description: "index-wot-kg.json"  
+4. rdf.js converts "index-wot-kg.json" to RDF data
+5. this output RDF is synced with solidPod
+6. rdf is then visualized
+7. rdf SPARQL queries are use exclusively to build json objects that feed:
+  - documentation generation
+  - in browser 3d rendering of the physical product/item.
+
+json-ld is visualized with json-vis
+
+test case:
+virtual joystick app
+- the remapping to vJoy is stored as a jsonLd document that in users solidpod 
+- the SPARQL knowledge graph is used to:
+  - create an in browser 3d rendering of the physical device 
+  - to label all svg 2d isometric views of the physical device
+    - svgs must be made from images in the documentation
+- svgs are animated with javascript in response to input events
 
 regarding 3d:
 https://www.youtube.com/watch?v=KKUI64_5MB8
