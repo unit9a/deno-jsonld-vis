@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
         "mechatronics"
-    ]
+    ],
+    "deno.enable": true,
+    "deno.codeLens.implementations": true,
+    "deno.codeLens.test": true,
+    "deno.codeLens.referencesAllFunctions": true,
+    "deno.codeLens.references": true,
 }
